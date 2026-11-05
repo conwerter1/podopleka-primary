@@ -7,7 +7,6 @@ import hashlib
 import json
 import mimetypes
 import os
-from acme_proxy import challenge_response
 
 BASE = Path(__file__).resolve().parent
 INDEX = json.loads((BASE / 'content-index.json').read_text(encoding='utf-8'))
@@ -66,13 +65,6 @@ def resolve(path, query):
     return (target, 200) if target in CONTENT else (None, 404)
 
 def app(environ, start_response):
-    validation = challenge_response(environ)
-    if validation is not None:
-        code, validation_headers, validation_body = validation
-        reason = {200: 'OK', 404: 'Not Found', 405: 'Method Not Allowed',
-                  502: 'Bad Gateway', 503: 'Service Unavailable'}[code]
-        start_response(str(code) + ' ' + reason, validation_headers)
-        return [validation_body]
     method = environ.get('REQUEST_METHOD', 'GET')
     path, status = resolve(environ.get('PATH_INFO', '/'), environ.get('QUERY_STRING', ''))
     if method not in ('GET', 'HEAD'):
