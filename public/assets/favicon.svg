@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <!-- © 2026 Алексей Алексин и Александра Костюченко. Все права защищены. -->
+  <title>Подоплёка</title>
+  <rect width="64" height="64" rx="14" fill="#071e36"/>
+  <path d="M13 15h31v34h-8V23H21v26h-8z" fill="#fff"/>
+  <circle cx="53" cy="45" r="4.5" fill="#90ded6"/>
+</svg>

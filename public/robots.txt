@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /?page=login
+Disallow: /?page=register
+Disallow: /?page=account
+Disallow: /?page=editor
+Sitemap: https://xn--80ahsdnbed7n.xn--p1ai/sitemap.xml
