@@ -94,7 +94,8 @@ def app(environ, start_response):
             kind += '; charset=utf-8'
         etag = '"' + digest + '"'
         headers.extend([('ETag', etag), ('Cache-Control', 'public, max-age=60' if path.endswith('.html') else 'public, max-age=3600')])
-        if environ.get('HTTP_IF_NONE_MATCH') == etag:
+        conditional_tags = environ.get('HTTP_IF_NONE_MATCH', '').split(',')
+        if any(value.strip() == '*' or value.strip().removeprefix('W/') == etag for value in conditional_tags):
             start_response('304 Not Modified', headers)
             return [b'']
         if path.startswith('downloads/'):
